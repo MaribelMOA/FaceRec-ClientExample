@@ -1,4 +1,4 @@
-🎥 ##FaceRec-AWS Client (.NET Framework)
+# 🎥 FaceRec-AWS Client (.NET Framework)
 Este es un cliente de ejemplo en Windows Forms (.NET Framework) para interactuar con el proyecto FaceRec-AWS Web API, el cual realiza reconocimiento facial usando la cámara del sistema, detección con OpenCV y comparación con AWS Rekognition. Las visitas se almacenan localmente en un archivo visits.json.
 
 ---
@@ -9,7 +9,7 @@ Este es un cliente de ejemplo en Windows Forms (.NET Framework) para interactuar
     - *Cancelar*: Elimina la ultima visita registrada, en cado de que el usuario reconocido no haya terminado el proceso.
  
   ---
-🧩 Estructura
+# 🧩 Estructura
 El proyecto incluye:
   - *FaceRecogntionService.cs*: clase que contiene fucniones para llamar a las reutas dde la API (check-and-register, delete-last-visit).
   - *FaceModels.cs*: Clases modelo (FaceCheckResult, FaceVisit, DeleteVisitResult) que representan las respuestas que se reciben de la API.
@@ -17,13 +17,13 @@ El proyecto incluye:
 
   ---
   
-🚀 Requisitos
+# 🚀 Requisitos
 - Tener corriendo el backend de FaceRec-AWS localmente
 - Tener .NET Framework instalado (recomendando 4.7.2 o superiror, de preferencia 4.8.1)
 - Visual Studio para compilar el proyecto de cliente.
 
 -----
-⚙️ Cómo usar
+# ⚙️ Cómo usar
 
 1. Clona este repositorio y abre el proyecto en Visual Studio.
 2. Verifica que el backend (repositorio FaceRec-AWS) este corriendo (por ejemplo:http://localhost:5116).
@@ -35,12 +35,12 @@ El proyecto incluye:
 6. Si termina, vuelve a la pantalla inicial para el siguiente usuario.
 
 ---
-🔗 API Referencia
+# 🔗 API Referencia
 Este cliente utiliza las siguientes rutas del backend:
 - POST /api/FaceRecognition/check-and-register:Captura, detecta, compara y registra la visita.
 - DELETE /api/FaceRecognition/delete-last-visit: Eliminar el ultimo iregistro del archivo visits.json.
 ---
-📸 Ejemplo de uso
+# 📸 Ejemplo de uso
 1. Usuario hace clic en Iniciar:
    - Se realiza reconocimiento con la camara y AWS Rekognition.
    - Si ya visito en las ultimas 24h: mensaje de denegacion.
