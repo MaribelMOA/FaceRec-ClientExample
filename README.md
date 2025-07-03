@@ -1,5 +1,5 @@
 # 🎥 FaceRec-AWS Client (.NET Framework)
-Este es un cliente de ejemplo en Windows Forms (.NET Framework) para interactuar con el proyecto FaceRec-AWS Web API, el cual realiza reconocimiento facial usando la cámara del sistema, detección con OpenCV y comparación con AWS Rekognition. Las visitas se almacenan localmente en un archivo visits.json.
+Este es un cliente de ejemplo en Windows Forms (.NET Framework) para interactuar con el proyecto FaceRec-AWS Web API (https://github.com/MaribelMOA/FaceRec-AWS), el cual realiza reconocimiento facial usando la cámara del sistema, detección con OpenCV y comparación con AWS Rekognition. Las visitas se almacenan localmente en un archivo visits.json.
 
 ---
 # 🧠 ¿Cómo funciona?
