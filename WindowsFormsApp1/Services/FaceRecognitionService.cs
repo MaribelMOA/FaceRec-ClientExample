@@ -13,25 +13,52 @@ namespace WindowsFormsApp1.Services
     {
 
         private readonly HttpClient httpClient = new HttpClient();
-        private readonly string baseUrl = "http://localhost:5116/api/FaceRecognition"; 
+        private readonly string baseUrl = "http://localhost:5116/api/FaceRecognition";
 
-        public async Task <FaceCheckResult> CheckAndRegister()
+        // 1. POST /capture-and-check
+        public async Task<FaceCheckResult> CaptureAndCheckAsync()
         {
-            var response = await httpClient.PostAsync($"{baseUrl}/check-and-register", null);
+            var response = await httpClient.PostAsync($"{baseUrl}/capture-and-check", new StringContent(""));
             if (!response.IsSuccessStatusCode)
-                    return null;
-            var json =await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<FaceCheckResult>(json);
+                return null;
 
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<FaceCheckResult>(json);
+        }
+        
+        // 2. POST /register-image?tempFileName=...&realFileName=...
+        public async Task<SimpleResult> RegisterImageAsync(string tempFileName, string realFileName)
+        {
+            var url = $"{baseUrl}/register-image?tempFileName={Uri.EscapeDataString(tempFileName)}&realFileName={Uri.EscapeDataString(realFileName)}";
+            var response = await httpClient.PostAsync(url, new StringContent("")); // cuerpo vacío
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<SimpleResult>(json);
         }
 
-        public async Task<DeleteVisitResult> DeleteLastVisitAsync()
+        // 3. DELETE /delete-tempImage/{tempFileName}
+        public async Task<SimpleResult> DeleteTempImageAsync(string tempFileName)
         {
-            var response = await httpClient.DeleteAsync($"{baseUrl}/delete-last-visit");
+            var url = $"{baseUrl}/delete-tempImage/{Uri.EscapeDataString(tempFileName)}";
+            var response = await httpClient.DeleteAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<SimpleResult>(json);
+        }
+
+        public async Task<GetImageResponse> GetImageUrlAsync(string fileName)
+        {
+            var response = await httpClient.GetAsync($"{baseUrl}/get-image?fileName={fileName}");
             if (!response.IsSuccessStatusCode)
                 return null;
             var json = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<DeleteVisitResult>(json);
+            return JsonConvert.DeserializeObject<GetImageResponse>(json);
         }
 
     }
