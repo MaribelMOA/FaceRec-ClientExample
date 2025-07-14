@@ -45,7 +45,7 @@ namespace WindowsFormsApp1
             currentResult = await faceService.CaptureAndCheckAsync();
             if (currentResult == null || currentResult.message!= null)
             {
-                MessageBox.Show("No se pudo capturar o verificar el rostro:",currentResult.message);
+                MessageBox.Show("No se pudo capturar o verificar el rostro:");
                 return;
             }
 
@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
 
             if (string.IsNullOrWhiteSpace(result?.imageUrl))
             {
-                MessageBox.Show("❌ No se pudo registrar la imagen: ", result.message);
+                MessageBox.Show("❌ No se pudo registrar la imagen: ");
                 return;
             }
 

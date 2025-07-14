@@ -5,7 +5,7 @@ namespace WindowsFormsApp1.Models
 {
     public class FaceCheckResult
     {
-       // public bool allowed { get; set; }
+        public bool allowed { get; set; }
         // Estos pueden faltar si ocurre un error 
         public string face_id { get; set; }
         public string external_image_id { get; set; }
