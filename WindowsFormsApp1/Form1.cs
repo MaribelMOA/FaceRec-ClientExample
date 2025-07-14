@@ -29,6 +29,8 @@ namespace WindowsFormsApp1
             InitializeComponent();
             btnIniciar.Visible = true;
 
+            
+
             btnTerminar.Visible = false;
             btnCancelar.Visible = false;
 
