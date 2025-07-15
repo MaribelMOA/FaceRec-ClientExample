@@ -43,7 +43,23 @@ namespace WindowsFormsApp1
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            // 1. Verificar cámara
+            var camResult = await faceService.CheckCameraAsync();
+            if (!camResult.success)
+            {
+                MessageBox.Show("🚫 Cámara no disponible: " + camResult.message);
+                return;
+            }
 
+            // 2. Verificar AWS
+            var awsResult = await faceService.CheckAWSAsync();
+            if (!awsResult.success)
+            {
+                MessageBox.Show("🚫 AWS Rekognition no disponible: " + awsResult.message);
+                return;
+            }
+
+            // 3. Capturar y verificar rostro
             currentResult = await faceService.CaptureAndCheckAsync();
             if (currentResult == null || currentResult.message!= null)
             {

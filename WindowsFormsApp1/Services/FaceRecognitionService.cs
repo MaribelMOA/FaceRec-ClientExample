@@ -25,7 +25,7 @@ namespace WindowsFormsApp1.Services
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<FaceCheckResult>(json);
         }
-        
+
         // 2. POST /register-image?tempFileName=...&realFileName=...
         public async Task<SimpleResult> RegisterImageAsync(string tempFileName, string realFileName)
         {
@@ -52,6 +52,8 @@ namespace WindowsFormsApp1.Services
             return JsonConvert.DeserializeObject<SimpleResult>(json);
         }
 
+        //4
+
         public async Task<GetImageResponse> GetImageUrlAsync(string fileName)
         {
             var response = await httpClient.GetAsync($"{baseUrl}/get-image?fileName={fileName}");
@@ -60,6 +62,48 @@ namespace WindowsFormsApp1.Services
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<GetImageResponse>(json);
         }
+
+        // 5. GET /check-camera
+        public async Task<SimpleResult> CheckCameraAsync()
+        {
+            var response = await httpClient.GetAsync($"{baseUrl}/check-camera");
+            if (!response.IsSuccessStatusCode)
+                return new SimpleResult { success = false, message = "Error checking camera." };
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<SimpleResult>(json);
+        }
+
+        // 6. GET /check-aws
+        public async Task<SimpleResult> CheckAWSAsync()
+        {
+            var response = await httpClient.GetAsync($"{baseUrl}/check-aws");
+            if (!response.IsSuccessStatusCode)
+                return new SimpleResult { success = false, message = "Error checking AWS Rekognition." };
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<SimpleResult>(json);
+        }
+
+        // 7. GET /health
+        public async Task<HealthStatusResult> CheckHealthAsync()
+        {
+            var response = await httpClient.GetAsync($"{baseUrl}/health");
+            if (!response.IsSuccessStatusCode)
+                return new HealthStatusResult
+                {
+                    camera_ok = false,
+                    aws_ok = false,
+                    aws_message = "Health check failed.",
+                    timestamp = DateTime.UtcNow
+                };
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<HealthStatusResult>(json);
+        }
+
+        
+
 
     }
 }
