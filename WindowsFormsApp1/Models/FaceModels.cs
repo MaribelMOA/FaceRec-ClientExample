@@ -9,7 +9,7 @@ namespace WindowsFormsApp1.Models
         // Estos pueden faltar si ocurre un error 
         public string face_id { get; set; }
         public string external_image_id { get; set; }
-       // public int visits_count { get; set; }
+        // public int visits_count { get; set; }
         public string image_file_path { get; set; }
         // Este solo viene si hubo un error
         public string message { get; set; }
@@ -59,6 +59,16 @@ namespace WindowsFormsApp1.Models
         public string tipo { get; set; } // "compra" o "venta"
         public float monto { get; set; }
         public DateTime created_at { get; set; }
+    }
+    
+    //////////////
+    
+    public class HealthStatusResult
+    {
+        public bool camera_ok { get; set; }
+        public bool aws_ok { get; set; }
+        public string aws_message { get; set; }
+        public DateTime timestamp { get; set; }
     }
 
 
